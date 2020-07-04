@@ -1,0 +1,9 @@
+<beans>
+    <bean id="mailService" class="com.boroday.ioc.testService.MailService">
+        <property name="protocol" value="POP3"/>
+        <property name="port" value="3000"/>
+    </bean>
+    <bean id="mailServiceNoSetter" class="com.boroday.ioc.testService.MailServiceNoSetter">
+        <property name="mailService" ref="mailService"/>
+    </bean>
+</beans>

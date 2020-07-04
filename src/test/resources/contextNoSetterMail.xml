@@ -1,0 +1,6 @@
+<beans>
+    <bean id="mailServiceNoSetter" class="com.boroday.ioc.testService.MailServiceNoSetter">
+        <property name="protocol" value="SMTP"/>
+        <property name="port" value="5000"/>
+    </bean>
+</beans>

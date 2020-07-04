@@ -1,0 +1,13 @@
+<beans>
+    <bean id="employeeService" class="com.boroday.ioc.testService.EmployeeService">
+        <property name="name" value="Frank"/>
+        <property name="gender" value="m"/>
+        <property name="age" value="33"/>
+        <property name="id" value="19476699805"/>
+        <property name="married" value="true"/>
+        <property name="childNumber" value="3"/>
+        <property name="departmentId" value="71"/>
+        <property name="salary" value="1250.5"/>
+        <property name="index" value="16.8F"/>;
+    </bean>
+</beans>

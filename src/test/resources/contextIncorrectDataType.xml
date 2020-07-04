@@ -1,0 +1,6 @@
+<beans>
+    <bean id="salaryService" class="com.boroday.ioc.testService.SalaryService">
+        <property name="employeeService" value="EmployeeService"/>
+        <property name="salary" value="1250.5"/>
+    </bean>
+</beans>
