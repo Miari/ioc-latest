@@ -3,7 +3,6 @@ package com.boroday.ioc.creator;
 import com.boroday.ioc.entity.Bean;
 import com.boroday.ioc.entity.BeanDefinition;
 import com.boroday.ioc.exception.BeanInstantiationException;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -13,7 +12,7 @@ public class RefDependencyInjector {
 
     List<Bean> beans;
 
-    public void inject (List<Bean> beans, List<BeanDefinition> beanDefinitions) {
+    public void inject(List<Bean> beans, List<BeanDefinition> beanDefinitions) {
         this.beans = beans;
         for (Bean bean : beans) {
             for (BeanDefinition beanDefinition : beanDefinitions) {
@@ -23,7 +22,14 @@ public class RefDependencyInjector {
                         for (String objectField : objectFields) {
                             try {
                                 Object refObject = getBean(beanDefinition.getRefDependencies().get(objectField));
-                                Method method = bean.getValue().getClass().getMethod("set" + Character.toUpperCase(objectField.charAt(0)) + objectField.substring(1), refObject.getClass());
+                                Method method;
+                                Class<?> refObjectInterface = getInterfaces(refObject.getClass());
+                                String methodName = "set" + Character.toUpperCase(objectField.charAt(0)) + objectField.substring(1);
+                                if (refObjectInterface == null) {
+                                    method = bean.getValue().getClass().getMethod(methodName, refObject.getClass());
+                                } else {
+                                    method = bean.getValue().getClass().getMethod(methodName, refObjectInterface);
+                                }
                                 method.invoke(bean.getValue(), refObject);
                             } catch (NoSuchMethodException e) {
                                 throw new BeanInstantiationException("Setter for " + objectField + " field of " + bean.getValue().getClass() + " is not found", e);
@@ -37,7 +43,21 @@ public class RefDependencyInjector {
         }
     }
 
-    private Object getBean(String idOfBean){
+    private Class<?> getInterfaces(Class<?> clazz) {
+        Class<?> refObjectInterfaces[] = clazz.getInterfaces();
+        if (refObjectInterfaces.length > 0) {
+            if (refObjectInterfaces.length > 1) {
+                throw new BeanInstantiationException("There is more than one interface for " + clazz);
+            }
+            Class<?> refObjectInterface = refObjectInterfaces[0];
+            return  refObjectInterface;
+            //return getInterfaces(refObjectInterface) == null ? refObjectInterfaces[0] : getInterfaces(refObjectInterface);
+        } else {
+            return null;
+        }
+    }
+
+    private Object getBean(String idOfBean) {
         Object resultBean = null;
         if (!beans.isEmpty()) {
             for (Bean bean : beans) {

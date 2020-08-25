@@ -1,6 +1,6 @@
 package com.boroday.ioc.testService;
 
-public class MailService {
+public class MailService implements DefaultMailService {
     private String protocol;
     private int port;
 
