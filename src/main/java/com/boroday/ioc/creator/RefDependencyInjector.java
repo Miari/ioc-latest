@@ -3,6 +3,7 @@ package com.boroday.ioc.creator;
 import com.boroday.ioc.entity.Bean;
 import com.boroday.ioc.entity.BeanDefinition;
 import com.boroday.ioc.exception.BeanInstantiationException;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -47,11 +48,10 @@ public class RefDependencyInjector {
         Class<?> refObjectInterfaces[] = clazz.getInterfaces();
         if (refObjectInterfaces.length > 0) {
             if (refObjectInterfaces.length > 1) {
-                throw new BeanInstantiationException("There is more than one interface for " + clazz);
+                return null;
             }
             Class<?> refObjectInterface = refObjectInterfaces[0];
-            return  refObjectInterface;
-            //return getInterfaces(refObjectInterface) == null ? refObjectInterfaces[0] : getInterfaces(refObjectInterface);
+            return getInterfaces(refObjectInterface) == null ? refObjectInterfaces[0] : getInterfaces(refObjectInterface);
         } else {
             return null;
         }

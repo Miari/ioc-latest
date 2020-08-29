@@ -1,14 +1,14 @@
 package com.boroday.ioc.testService;
 
 public class PaymentService {
-    private DefaultMailService mailService;
+    private MailService mailService;
     private int maxAmount;
 
-    public DefaultMailService getMailService() {
+    public MailService getMailService() {
         return mailService;
     }
 
-    public void setMailService(DefaultMailService mailService) {
+    public void setMailService(MailService mailService) {
         this.mailService = mailService;
     }
 

@@ -3,7 +3,7 @@ package com.boroday.ioc.context;
 import com.boroday.ioc.exception.BeanInstantiationException;
 import org.junit.Test;
 
-public class ClasspathApplicationContextNegativeTest {
+public class ClassPathApplicationContextNegativeTest {
     ApplicationContext applicationContext;
 
     @Test(expected = BeanInstantiationException.class)

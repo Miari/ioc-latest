@@ -2,7 +2,7 @@ package com.boroday.ioc.creator;
 
 import com.boroday.ioc.entity.Bean;
 import com.boroday.ioc.entity.BeanDefinition;
-import com.boroday.ioc.testService.MailService;
+import com.boroday.ioc.testService.DefaultMailService;
 import com.boroday.ioc.testService.PaymentService;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +25,7 @@ public class BeanCreationITest {
         //beans
         beanMail = new Bean();
         beanMail.setId("mailService");
-        beanMail.setValue(new MailService());
+        beanMail.setValue(new DefaultMailService());
 
         beanPayment = new Bean();
         beanPayment.setId("paymentService");
@@ -38,7 +38,7 @@ public class BeanCreationITest {
         //beanDefinitions
         BeanDefinition beanDefinitionMail = new BeanDefinition();
         beanDefinitionMail.setId("mailService");
-        beanDefinitionMail.setBeanClassName("com.boroday.ioc.testService.MailService");
+        beanDefinitionMail.setBeanClassName("com.boroday.ioc.testService.DefaultMailService");
         Map<String, String> valueMapMail = new HashMap<>();
         valueMapMail.put("protocol", "IMAP");
         valueMapMail.put("port", "7000");
@@ -85,12 +85,12 @@ public class BeanCreationITest {
             assertTrue(beansForValidation.contains(bean));
         }
 
-        assertEquals("IMAP", ((MailService) beans.get(0).getValue()).getProtocol());
-        assertEquals(7000, ((MailService) beans.get(0).getValue()).getPort());
+        assertEquals("IMAP", ((DefaultMailService) beans.get(0).getValue()).getProtocol());
+        assertEquals(7000, ((DefaultMailService) beans.get(0).getValue()).getPort());
 
-        assertEquals(MailService.class, ((PaymentService) beans.get(1).getValue()).getMailService().getClass());
+        assertEquals(DefaultMailService.class, ((PaymentService) beans.get(1).getValue()).getMailService().getClass());
 
         assertEquals(7300, ((PaymentService) beans.get(2).getValue()).getMaxAmount());
-        assertEquals(MailService.class, ((PaymentService) beans.get(2).getValue()).getMailService().getClass());
+        assertEquals(DefaultMailService.class, ((PaymentService) beans.get(2).getValue()).getMailService().getClass());
     }
 }

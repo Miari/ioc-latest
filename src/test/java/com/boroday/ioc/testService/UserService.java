@@ -1,13 +1,13 @@
 package com.boroday.ioc.testService;
 
 public class UserService {
-    private DefaultMailService mailService;
+    private MailService mailService;
 
-    public DefaultMailService getMailService() {
+    public MailService getMailService() {
         return mailService;
     }
 
-    public void setMailService(DefaultMailService mailService) {
+    public void setMailService(MailService mailService) {
         this.mailService = mailService;
     }
 

@@ -1,6 +1,6 @@
 package com.boroday.ioc.context;
 
-import com.boroday.ioc.testService.MailService;
+import com.boroday.ioc.testService.DefaultMailService;
 import com.boroday.ioc.testService.PaymentService;
 import com.boroday.ioc.testService.UserService;
 import org.junit.Test;
@@ -39,12 +39,12 @@ public class ClassPathApplicationContextTest {
         applicationContext = new ClassPathApplicationContext(pathToContextFile);
 
         //when
-        MailService beanMailService = (MailService) applicationContext.getBean("mailService");
+        DefaultMailService beanMailService = (DefaultMailService) applicationContext.getBean("mailService");
         UserService beanUserService = (UserService) applicationContext.getBean("userService");
         PaymentService beanPaymentService = (PaymentService) applicationContext.getBean("paymentService");
 
         //then
-        assertEquals("com.boroday.ioc.testService.MailService", beanMailService.getClass().getName());
+        assertEquals("com.boroday.ioc.testService.DefaultMailService", beanMailService.getClass().getName());
         assertEquals("com.boroday.ioc.testService.UserService", beanUserService.getClass().getName());
         assertEquals("com.boroday.ioc.testService.PaymentService", beanPaymentService.getClass().getName());
     }
@@ -64,11 +64,11 @@ public class ClassPathApplicationContextTest {
         applicationContext = new ClassPathApplicationContext(pathToContextFile);
 
         //when
-        MailService beanMailService = applicationContext.getBean(MailService.class);
+        DefaultMailService beanMailService = applicationContext.getBean(DefaultMailService.class);
         UserService beanUserService = applicationContext.getBean(UserService.class);
 
         //then
-        assertEquals("com.boroday.ioc.testService.MailService", beanMailService.getClass().getName());
+        assertEquals("com.boroday.ioc.testService.DefaultMailService", beanMailService.getClass().getName());
         assertEquals("com.boroday.ioc.testService.UserService", beanUserService.getClass().getName());
     }
 
@@ -87,13 +87,13 @@ public class ClassPathApplicationContextTest {
         applicationContext = new ClassPathApplicationContext(pathToContextFile);
 
         //when
-        MailService beanMailService = applicationContext.getBean("mailService", MailService.class);
+        DefaultMailService beanMailService = applicationContext.getBean("mailService", DefaultMailService.class);
         UserService beanUserService = applicationContext.getBean("userService", UserService.class);
         PaymentService beanPaymentService = applicationContext.getBean("paymentService", PaymentService.class);
         PaymentService beanPaymentWithMaxService = applicationContext.getBean("paymentWithMaxService", PaymentService.class);
 
         //then
-        assertEquals("com.boroday.ioc.testService.MailService", beanMailService.getClass().getName());
+        assertEquals("com.boroday.ioc.testService.DefaultMailService", beanMailService.getClass().getName());
         assertEquals("com.boroday.ioc.testService.UserService", beanUserService.getClass().getName());
         assertEquals("com.boroday.ioc.testService.PaymentService", beanPaymentService.getClass().getName());
         assertEquals("com.boroday.ioc.testService.PaymentService", beanPaymentWithMaxService.getClass().getName());
@@ -105,6 +105,6 @@ public class ClassPathApplicationContextTest {
         applicationContext = new ClassPathApplicationContext(new String[]{"src/test/resources/contextErrorMultipleBeanIds.xml"});
 
         //then
-        applicationContext.getBean("mailService", MailService.class);
+        applicationContext.getBean("mailService", DefaultMailService.class);
     }
 }

@@ -1,5 +1,5 @@
 <beans>
-    <bean id="mailServiceSMTP" class="com.boroday.ioc.testService.MailService">
+    <bean id="mailServiceSMTP" class="com.boroday.ioc.testService.DefaultMailService">
         <property name="protocol" value="SMTP"/>
         <property name="port" value="5000"/>
     </bean>

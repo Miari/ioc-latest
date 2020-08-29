@@ -1,0 +1,8 @@
+<beans>
+    <bean id="promotionService" class="com.boroday.ioc.testService.DefaultManagerPromotionService">
+        <property name="role" value="Vice President"/>
+    </bean>
+    <bean id="managerService" class="com.boroday.ioc.testService.ManagerService">
+        <property name="promotionService" ref="promotionService"/>
+    </bean>
+</beans>

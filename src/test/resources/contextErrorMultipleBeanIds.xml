@@ -1,9 +1,9 @@
 <beans>
-    <bean id="mailService" class="com.boroday.ioc.testService.MailService">
+    <bean id="mailService" class="com.boroday.ioc.testService.DefaultMailService">
         <property name="protocol" value="POP3"/>
         <property name="port" value="3000"/>
     </bean>
-    <bean id="mailService" class="com.boroday.ioc.testService.MailService">
+    <bean id="mailService" class="com.boroday.ioc.testService.DefaultMailService">
         <property name="protocol" value="SMTP"/>
         <property name="port" value="5000"/>
     </bean>

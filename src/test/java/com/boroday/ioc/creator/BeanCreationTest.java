@@ -4,7 +4,7 @@ import com.boroday.ioc.context.ClassPathApplicationContext;
 import com.boroday.ioc.entity.Bean;
 import com.boroday.ioc.entity.BeanDefinition;
 import com.boroday.ioc.exception.BeanInstantiationException;
-import com.boroday.ioc.testService.MailService;
+import com.boroday.ioc.testService.DefaultMailService;
 import com.boroday.ioc.testService.PaymentService;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,7 +33,7 @@ public class BeanCreationTest {
         //beans
         beanMail = new Bean();
         beanMail.setId("mailService");
-        beanMail.setValue(new MailService());
+        beanMail.setValue(new DefaultMailService());
 
         beanPayment = new Bean();
         beanPayment.setId("paymentService");
@@ -46,7 +46,7 @@ public class BeanCreationTest {
         //beanDefinitions
         beanDefinitionMail = new BeanDefinition();
         beanDefinitionMail.setId("mailService");
-        beanDefinitionMail.setBeanClassName("com.boroday.ioc.testService.MailService");
+        beanDefinitionMail.setBeanClassName("com.boroday.ioc.testService.DefaultMailService");
         Map<String, String> valueMapMail = new HashMap<>();
         valueMapMail.put("protocol", "IMAP");
         valueMapMail.put("port", "7000");
@@ -142,7 +142,7 @@ public class BeanCreationTest {
         injector.inject(beansForValidationShort, beanDefinitionsShort);
 
         //then
-        assertEquals(MailService.class, (beanPayment.getValue().getClass().getMethod("getMailService").invoke(beanPayment.getValue())).getClass());
+        assertEquals(DefaultMailService.class, (beanPayment.getValue().getClass().getMethod("getMailService").invoke(beanPayment.getValue())).getClass());
     }
 
     @Test (expected = BeanInstantiationException.class)

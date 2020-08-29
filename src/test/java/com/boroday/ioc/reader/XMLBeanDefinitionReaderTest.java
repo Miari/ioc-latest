@@ -20,7 +20,7 @@ public class XMLBeanDefinitionReaderTest {
         assertEquals(5, beanDefinitions.size());
         //dependencies
         assertEquals("mailService", beanDefinitions.get(0).getId());
-        assertEquals("com.boroday.ioc.testService.MailService", beanDefinitions.get(0).getBeanClassName());
+        assertEquals("com.boroday.ioc.testService.DefaultMailService", beanDefinitions.get(0).getBeanClassName());
         assertEquals("POP3", beanDefinitions.get(0).getDependencies().get("protocol"));
         assertEquals("3000", beanDefinitions.get(0).getDependencies().get("port"));
         //refDependencies
